@@ -1,5 +1,8 @@
 from setuptools import setup
 
+with open("requirements.txt", "r") as reqs:
+    requirements = reqs.readlines()
+
 setup(name='funniest',
       version='0.1',
       description='A framework that gives a remote control for computers that is Python driven',
@@ -8,4 +11,5 @@ setup(name='funniest',
       author_email='patviafore+rcfc@gmail.com',
       license='MIT',
       packages=['rcfc'],
+      install_requires=requirements,
       zip_safe=False)
