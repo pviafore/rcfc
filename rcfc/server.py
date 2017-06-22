@@ -3,7 +3,6 @@ Runs the webserver for rcfc
 """
 
 from bottle import run, route, get
-from json import dumps
 
 _buttons_registered = []
 
