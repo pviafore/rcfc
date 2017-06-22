@@ -3,7 +3,7 @@ from setuptools import setup
 with open("requirements.txt", "r") as reqs:
     requirements = reqs.readlines()
 
-setup(name='funniest',
+setup(name='rcfc',
       version='0.1',
       description='A framework that gives a remote control for computers that is Python driven',
       url='http://github.com/pviafore/rcfc',
