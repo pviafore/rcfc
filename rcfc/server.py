@@ -35,7 +35,7 @@ def route_index():
     return static_file("index.html", root="rcfc/static")
 
 
-@get("/<path:path>")
+@get("/static/<path:path>")
 def route_js(path):
     """ Route to the JS page"""
     if path not in ["index.js", "static.css"]:
