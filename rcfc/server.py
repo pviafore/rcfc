@@ -39,7 +39,7 @@ def route_index():
 def route_js(path):
     """ Route to the JS page"""
     if path not in ["index.js", "static.css"]:
-        response.status_code = 404
+        response.status = 404
         return
     return static_file(path, root="rcfc/static")
 
