@@ -1,0 +1,15 @@
+#top {
+    display: flex;
+    justify-content: center;
+}
+
+#remote {
+    display: flex;
+    justify-content: center;
+    background-color: lightgray;
+}
+
+button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

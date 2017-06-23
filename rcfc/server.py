@@ -2,7 +2,7 @@
 Runs the webserver for rcfc
 """
 
-from bottle import run, route, get, static_file
+from bottle import run, route, get, static_file, response
 
 _buttons_registered = []
 
@@ -35,14 +35,19 @@ def route_index():
     return static_file("index.html", root="rcfc/static")
 
 
-@get("/index.js")
-def route_js():
+@get("/<path:path>")
+def route_js(path):
     """ Route to the JS page"""
-    return static_file("index.js", root="rcfc/static")
+    if path not in ["index.js", "static.css"]:
+        response.status_code = 404
+        return
+    return static_file(path, root="rcfc/static")
 
 
 def start():
     """
     Starts our webserver on port 7232
     """
+    print("You can view your buttons in a web-browser "\
+          "by navigating to http://localhost:7232/")
     run(host="0.0.0.0", port=7232)

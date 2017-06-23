@@ -13,7 +13,7 @@
 
     function displayButton(button) {
         if (button.type === "button.simple") {
-            $("#remote").append("<button class='btn-xl btn-info' id='" + getId(button.id) + "'>" + button.text + "</button>");
+            $("#remote").append("<button class='btn-lg btn-info col-sm-2' id='" + getId(button.id) + "'>" + button.text + "</button>");
             $("#" + getId(button.id)).click(function () {
                 $.post({url: "/buttons/" + button.id});
             });
