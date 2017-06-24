@@ -5,12 +5,20 @@ A demo service for buttons
 from rcfc import button, server
 
 
-@button.simple("easy")
+@button.simple("Easy")
 def simple_button():
     """
     Print to console that it was easy
     """
-    print("easy")
+    print("That was easy, wasn't it")
+
+
+@button.simple("Button!")
+def simple_button():
+    """
+    Print to console that a button was pressed
+    """
+    print("You pressed a different button!")
 
 
 def main():
