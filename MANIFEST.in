@@ -1,0 +1,2 @@
+include rcfc/static/*
+include requirements.txt
