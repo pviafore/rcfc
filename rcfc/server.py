@@ -7,8 +7,10 @@ from bottle import run, route, get, static_file, response
 
 _buttons_registered = []
 
+
 def _get_static_directory():
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), "static")
+
 
 def register_post(button, func):
     """
@@ -51,6 +53,6 @@ def start():
     """
     Starts our webserver on port 7232
     """
-    print("You can view your buttons in a web-browser "\
+    print("You can view your buttons in a web-browser "
           "by navigating to http://localhost:7232/")
     run(host="0.0.0.0", port=7232)
