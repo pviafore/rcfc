@@ -4,7 +4,7 @@ with open("requirements.txt", "r") as reqs:
     requirements = reqs.readlines()
 
 setup(name='rcfc',
-      version='0.2.6',
+      version='0.3.0',
       description='A framework that gives a remote control for computers that is Python driven',
       url='http://github.com/pviafore/rcfc',
       author='Pat Viafore',
@@ -13,4 +13,7 @@ setup(name='rcfc',
       packages=['rcfc'],
       package_data={'rcfc': ['static/*']},
       install_requires=requirements,
-      zip_safe=False)
+      zip_safe=False,
+      entry_points = {
+            'console_scripts' : [ 'rcfc_demo = rcfc.demo:main']
+      })
