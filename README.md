@@ -5,7 +5,7 @@ It provides a way to write Python functions that can be exposed as buttons on a 
 
 ## Installing 
 
-Just `pip install rcfc`.  Note, this is only supported by Python 3.5 and later (no legacy Python)
+Just `pip install rcfc`.  Note, this is only supported by Python 3.6 and later (no legacy Python)
 
 ## There's barely any types of buttons!
 
