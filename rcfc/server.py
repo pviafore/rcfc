@@ -2,7 +2,6 @@
 Runs the webserver for rcfc
 """
 import os
-from pathlib import Path
 
 from bottle import run, route, get, static_file, response
 
@@ -10,7 +9,7 @@ _buttons_registered = []
 
 
 def _get_static_directory():
-    return Path(os.path.realpath(__file__)) / "static"
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), "static")
 
 
 def register_post(button, func):

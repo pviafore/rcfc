@@ -1,11 +1,5 @@
-#top {
-    display: flex;
-    justify-content: center;
-}
 
 #remote {
-    display: flex;
-    justify-content: center;
     background-color: lightgray;
 }
 
