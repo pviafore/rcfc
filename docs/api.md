@@ -30,7 +30,7 @@ Every button will have the following:
 A button that you can press, containing some text
 
 Data: 
-```json
+```
 {
   "id": <id>,
   "type": "button.simple",
