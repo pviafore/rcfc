@@ -1,7 +1,7 @@
 language: python
 python: 
-  - "3.5"
   - "3.6"
   - "nightly"
+before_install: "python setup.py install"
 install: "pip install -r requirements.txt -r dev_requirements.txt"
 script: make test
