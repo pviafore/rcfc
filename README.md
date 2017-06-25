@@ -3,9 +3,9 @@ Welcome to RCFC.  This is a pet project started to help out with some automation
 
 It provides a way to write Python functions that can be exposed as buttons on a website.  There are plans to make an Android app that would automatically connect to RCFC servers and provide a UI to the user.  For now, we have to deal with a ugly website UI (if you want to spruce it up, feel free to submit a PR)
 
-## Installing
+## Installing (In-Progress)
 
-Just `pip install rcfc` 
+Just `pip install rcfc` (not available yet)
 
 ## There's barely any types of buttons!
 
