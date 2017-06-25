@@ -20,7 +20,7 @@ def register_post(button, func):
     :return:
     """
     next_index = len(_buttons_registered)
-    route(f"/buttons/{next_index}", "POST", func)
+    func(f"/buttons/{next_index}", "POST", func)
     button["id"] = next_index
     _buttons_registered.append(button)
 

@@ -6,6 +6,7 @@ def do_nothing():
 
 
 def test_simple_button_registration():
+
     button.simple("this is a button")(do_nothing)
     expected = {"text": "this is a button",
                 "type": "button.simple",
