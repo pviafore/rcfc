@@ -1,6 +1,7 @@
 # API Guide
 
-RCFC uses a Rest API to provide buttons to whatever the UI is.
+RCFC uses a Rest API to provide buttons to whatever the UI is. 
+
 
 ## Endpoints
 
