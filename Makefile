@@ -6,7 +6,7 @@ PYTEST?=py.test
 PEP8?=pep8
 
 test: pep8
-		$(PYTEST) -v tests
+		$(PYTEST) -vvs tests
 
 init:
 		$(PIP) install -r requirements.txt
