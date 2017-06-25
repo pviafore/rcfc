@@ -3,9 +3,9 @@ Welcome to RCFC.  This is a pet project started to help out with some automation
 
 It provides a way to write Python functions that can be exposed as buttons on a website.  There are plans to make an Android app that would automatically connect to RCFC servers and provide a UI to the user.  For now, we have to deal with a ugly website UI (if you want to spruce it up, feel free to submit a PR)
 
-## Installing (In-Progress)
+## Installing 
 
-Just `pip install rcfc` (not available yet).  Note, this is only supported by Python 3.5 and later (no legacy Python)
+Just `pip install rcfc`.  Note, this is only supported by Python 3.5 and later (no legacy Python)
 
 ## There's barely any types of buttons!
 
@@ -37,6 +37,7 @@ def button_has_been_pressed():
     print("This button has been pressed")
 ```
 This will provide a pressable button with the text you provide (in this case, "Press Me!")
+This is great if you want to do things like turn on/turn off something, perform a one time action, etc.
 
 
 ## Demo
