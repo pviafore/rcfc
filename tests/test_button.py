@@ -15,4 +15,6 @@ def test_simple_button_registration(mock_route):
                 "id": 0}
     assert server.get_buttons_registered() == {"buttons": [expected]}
 
-    mock_route.assert_called_once_with("/buttons/0", "POST", do_nothing)
+    mock_route.assert_called_once_with("/buttons/0",
+                                       ["POST", "OPTIONS"],
+                                       do_nothing)
