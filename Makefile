@@ -3,7 +3,7 @@
 PIP?=pip3
 PYTHON?=python3
 PYTEST?=py.test
-PEP8?=pep8
+PEP8?=pycodestyle
 
 test: pep8
 		$(PYTEST) -vvs tests

@@ -23,7 +23,7 @@ from rcfc import server
 server.start()
 ```
 
-Now if you navigate to http://<ip-address>:7232 you should see a simple webpage that provides a simple UI (long term plans is Android App)
+Now if you navigate to http://\<ip-address\>:7232 you should see a simple webpage that provides a simple UI (long term plans is Android App)
 
 ## Buttons
 ### Simple

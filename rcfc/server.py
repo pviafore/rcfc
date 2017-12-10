@@ -3,7 +3,7 @@ Runs the webserver for rcfc
 """
 import os
 
-from bottle import run, route, get, static_file, response
+from bottle import run, route, get, hook, static_file, response
 
 _buttons_registered = []
 
@@ -23,6 +23,22 @@ def register_post(button, func):
     route(f"/buttons/{next_index}", "POST", func)
     button["id"] = next_index
     _buttons_registered.append(button)
+
+
+@hook('after_request')
+def enable_cors():
+    """
+    You need to add some headers to each request.
+    Don't use the wildcard '*' for Access-Control-Allow-Origin in production.
+    """
+
+    response.headers['Access-Control-Allow-Origin'] = '*'
+
+    methods = 'PUT, GET, POST, DELETE, OPTIONS'
+    response.headers['Access-Control-Allow-Methods'] = methods
+
+    headers = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
+    response.headers['Access-Control-Allow-Headers'] = headers
 
 
 @get("/buttons")
