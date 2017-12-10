@@ -13,6 +13,7 @@ setup(name='rcfc',
       packages=['rcfc'],
       package_data={'rcfc': ['static/*']},
       install_requires=requirements,
+      python_requires='>=3.6',
       zip_safe=False,
       entry_points = {
             'console_scripts' : [ 'rcfc_demo = rcfc.demo:main']
