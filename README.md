@@ -44,6 +44,8 @@ This is great if you want to do things like turn on/turn off something, perform 
 There is a built-in demo if you'd like to see it in action.  Simply execute rcfc_demo on your shell (or make demo if you're in the project) and a demo server will launch on port 7232.
 Open up http://localhost:7232 to see buttons that are available.  You can see the source code at [demo source code](rcfc/demo.py)
 
+You can also check the companion GUI project, which makes it look a lot nicer.  See it [here](https://github.com/pviafore/rcfc-ionic)
+
 ## Why Bottle under the hood? Why not use Flask, Django, Pyramid, etc.?
 Bottle had a very small footprint and very few dependencies.  The goal is to get this project up and going as quickly as possible.
 
