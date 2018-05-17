@@ -27,7 +27,7 @@ def test_simple_button_registration(mock_route):
 def test_button_registration_fails_when_arguments(mock_route):
     server.clear_buttons()
     with pytest.raises(server.InvalidArgumentsException):
-        server.register_post({"data": "x"}, lambda x: None)
+        button.simple("this is a button")(do_nothing)
     assert server.get_buttons_registered() == {'buttons': []}
     mock_route.assert_not_called()
 
