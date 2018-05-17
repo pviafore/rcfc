@@ -14,7 +14,7 @@ def simple_button():
 
 
 @button.simple("Button!")
-def simple_button():
+def simple_button2():
     """
     Print to console that a button was pressed
     """
