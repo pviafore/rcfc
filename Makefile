@@ -6,7 +6,7 @@ PYTEST?=py.test
 PEP8?=pycodestyle
 
 test: pep8
-		$(PYTEST) -vvs tests
+		PYTHONPATH=. $(PYTEST) -vvs tests
 
 init:
 		$(PIP) install -r requirements.txt

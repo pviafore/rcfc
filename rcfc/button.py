@@ -10,3 +10,10 @@ def simple(text):
     def wrapper(func):
         register_post({"text": text,  "type": "button.simple"}, func)
     return wrapper
+
+
+def toggle(text):
+    """ A on/off slider toggle """
+    def wrapper(func):
+        register_post({"text": text, "type": "button.toggle"}, func)
+    return wrapper

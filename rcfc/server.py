@@ -12,6 +12,10 @@ def _get_static_directory():
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), "static")
 
 
+def clear_buttons():
+    _buttons_registered.clear()
+
+
 def register_post(button, func):
     """
     Register a Post endpoint
