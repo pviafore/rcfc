@@ -9,6 +9,13 @@ from bottle import run, route, get, hook, static_file, response
 _buttons_registered = []
 
 
+def getter_placeholder():
+    """
+    A placeholder that just returns None
+    """
+    return None
+
+
 def _get_static_directory():
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), "static")
 
@@ -17,18 +24,36 @@ def clear_buttons():
     _buttons_registered.clear()
 
 
-def register_post(button, func):
+def register_post(button, setter):
     """
     Register a Post endpoint
     :param button: the info on the button
-    :param func: the function to call when we post
+    :param setterc: the function to call when we post
     :return:
     """
-    _validate_arguments(func, 0)
+    _validate_arguments(setter, 0)
+    _register_button_action(button, getter_placeholder, setter)
+
+
+def _register_button_action(button, getter, setter):
     next_index = len(_buttons_registered)
-    route(f"/buttons/{next_index}", ["POST", "OPTIONS"], func)
+    route(f"/buttons/{next_index}", ["POST", "OPTIONS"], setter)
     button["id"] = next_index
+    button["getter"] = getter
+
     _buttons_registered.append(button)
+
+
+def register_post_with_state(button, getter, setter):
+    """
+    Register a post endpoint that can change state
+    :param button: the info on the button
+    :param getter: the getter to call when the app asks for buttons
+    :param setter: the setter that updates the state
+    :return:
+    """
+    _validate_arguments(setter, 1)
+    _register_button_action(button, getter, setter)
 
 
 def _validate_arguments(func, expected):

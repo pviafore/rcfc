@@ -21,10 +21,20 @@ def simple_button():
     print("You pressed a different button!")
 
 
-@button.toggle("Toggle!")
+bool_value = False
+
+
+def getter():
+    """ Return our boolean value"""
+    return bool_value
+
+
+@button.toggle("Toggle!", getter)
 def toggle_button(toggle):
     """ Toggle on or off """
     print(f"The toggle was set to {toggle}")
+    global bool_value
+    bool_value = toggle
 
 
 def main():
