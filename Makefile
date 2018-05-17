@@ -16,6 +16,6 @@ pep8: init
 		$(PEP8) rcfc tests
 
 demo:
-		cd rcfc && $(PYTHON) demo.py
+		PYTHONPATH=. $(PYTHON) rcfc/demo.py
 
 .PHONY: init test pep8 demo

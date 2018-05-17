@@ -18,6 +18,12 @@
                 $.post({url: "/buttons/" + button.id});
             });
         }
+        if (button.type === "button.toggle") {
+            $("#remote").append("<div class='row'>" + button.text + ": <label class='switch'><input type='checkbox' id='" + getId(button.id) + "'><span class='slider round'></span></label></button></div>");
+            $("#" + getId(button.id)).click(function () {
+                $.post({url: "/buttons/" + button.id, data : button.checked});
+            });
+        }
     }
 
     function displayButtons(data) {

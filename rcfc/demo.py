@@ -21,6 +21,12 @@ def simple_button():
     print("You pressed a different button!")
 
 
+@button.toggle("Toggle!")
+def toggle_button(toggle):
+    """ Toggle on or off """
+    print(f"The toggle was set to {toggle}")
+
+
 def main():
     """
     Main Method

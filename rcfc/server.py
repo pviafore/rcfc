@@ -1,6 +1,7 @@
 """
 Runs the webserver for rcfc
 """
+import inspect
 import os
 
 from bottle import run, route, get, hook, static_file, response
@@ -23,10 +24,17 @@ def register_post(button, func):
     :param func: the function to call when we post
     :return:
     """
+    _validate_arguments(func, 0)
     next_index = len(_buttons_registered)
     route(f"/buttons/{next_index}", ["POST", "OPTIONS"], func)
     button["id"] = next_index
     _buttons_registered.append(button)
+
+
+def _validate_arguments(func, expected):
+    number_of_arguments = len(inspect.getargspec(func).args)
+    if number_of_arguments != expected:
+        raise InvalidArgumentsException(expected, number_of_arguments)
 
 
 @hook('after_request')
@@ -76,3 +84,9 @@ def start():
     print("You can view your buttons in a web-browser "
           "by navigating to http://localhost:7232/")
     run(host="0.0.0.0", port=7232)
+
+
+class InvalidArgumentsException(ValueError):
+    def __init__(self, expected, actual):
+        message = f"Expected {expected} arguments, but got {actual} arguments"
+        super().__init__(message)

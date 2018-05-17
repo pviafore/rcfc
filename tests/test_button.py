@@ -1,5 +1,7 @@
 from unittest.mock import patch
 
+import pytest
+
 from rcfc import server, button
 
 
@@ -19,6 +21,15 @@ def test_simple_button_registration(mock_route):
     mock_route.assert_called_once_with("/buttons/0",
                                        ["POST", "OPTIONS"],
                                        do_nothing)
+
+
+@patch("bottle.Bottle.route")
+def test_button_registration_fails_when_arguments(mock_route):
+    server.clear_buttons()
+    with pytest.raises(server.InvalidArgumentsException):
+        server.register_post({"data": "x"}, lambda x: None)
+    assert server.get_buttons_registered() == {'buttons': []}
+    mock_route.assert_not_called()
 
 
 @patch("bottle.Bottle.route")
