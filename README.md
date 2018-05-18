@@ -39,6 +39,22 @@ def button_has_been_pressed():
 This will provide a pressable button with the text you provide (in this case, "Press Me!")
 This is great if you want to do things like turn on/turn off something, perform a one time action, etc.
 
+### Toggles
+A toggle provides an on / off switch
+```python
+from rcfc import button
+
+def get_state():
+    # write your own function that returns the current state of the toggle
+    return True
+
+@button.toggle("Toggle", get_state)
+def button_has_been_toggled(value):
+    print(f"The value is {value}")
+```
+
+The function decorated will be passed a True/False value when the toggle is set.   There is also a getter function that reflects the correct state. 
+
 
 ## Demo
 There is a built-in demo if you'd like to see it in action.  Simply execute rcfc_demo on your shell (or make demo if you're in the project) and a demo server will launch on port 7232.
