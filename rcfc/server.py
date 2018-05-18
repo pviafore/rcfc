@@ -84,7 +84,11 @@ def get_buttons_registered():
     Get buttons registered
     :return: a dictionary containing buttons registered
     """
-    return {"buttons": _buttons_registered}
+    buttons_with_state = [dict(b) for b in _buttons_registered]
+    for button in buttons_with_state:
+        button["state"] = button["getter"]()
+        del button["getter"]
+    return {"buttons": buttons_with_state}
 
 
 @get("/")

@@ -4,9 +4,11 @@ import pytest
 
 from rcfc import server, button
 
+bool_value = False
+
 
 def do_nothing():
-    pass
+    return bool_value
 
 
 def do_nothing_arg(token_argument):
@@ -19,7 +21,7 @@ def test_simple_button_registration(mock_route):
     button.simple("this is a button")(do_nothing)
     expected = {"text": "this is a button",
                 "type": "button.simple",
-                "getter": server.getter_placeholder,
+                "state": None,
                 "id": 0}
     assert server.get_buttons_registered() == {"buttons": [expected]}
 
@@ -43,8 +45,13 @@ def test_toggle_button_registration(mock_route):
     button.toggle("Toggle Button", do_nothing)(do_nothing_arg)
     expected = {"text": "Toggle Button",
                 "type": "button.toggle",
-                "getter": do_nothing,
+                "state": False,
                 "id": 0}
+    assert server.get_buttons_registered() == {"buttons": [expected]}
+
+    global bool_value
+    bool_value = True
+    expected["state"] = True
     assert server.get_buttons_registered() == {"buttons": [expected]}
 
     mock_route.assert_called_once_with("/buttons/0",
