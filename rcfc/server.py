@@ -55,7 +55,7 @@ def register_post_with_state(button, getter, setter):
     _validate_arguments(setter, 1)
 
     def set_value():
-        setter(request.json)
+        setter(request.json['value'])
 
     _register_button_action(button, getter, set_value)
 

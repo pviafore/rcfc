@@ -21,8 +21,11 @@
         if (button.type === "button.toggle") {
             $("#remote").append("<div class='row'>" + button.text + ": <label class='switch'><input type='checkbox' id='" + getId(button.id) + "'><span class='slider round'></span></label></button></div>");
             $("#" + getId(button.id)).click(function () {
-                $.post({url: "/buttons/" + button.id, data : button.checked});
+                $.post({url: "/buttons/" + button.id, data: JSON.stringify({value: $("#" + getId(button.id)).prop('checked')}), contentType: "application/json"})
             });
+            if(button.state) {
+                $("#" + getId(button.id)).prop('checked', true);
+            }
         }
     }
 
