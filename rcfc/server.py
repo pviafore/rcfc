@@ -4,7 +4,7 @@ Runs the webserver for rcfc
 import inspect
 import os
 
-from bottle import run, route, get, hook, static_file, response
+from bottle import run, route, get, hook, static_file, request, response
 
 _buttons_registered = []
 
@@ -53,7 +53,11 @@ def register_post_with_state(button, getter, setter):
     :return:
     """
     _validate_arguments(setter, 1)
-    _register_button_action(button, getter, setter)
+
+    def set_value():
+        setter(request.json)
+
+    _register_button_action(button, getter, set_value)
 
 
 def _validate_arguments(func, expected):

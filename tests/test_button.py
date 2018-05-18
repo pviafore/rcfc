@@ -11,8 +11,9 @@ def do_nothing():
     return bool_value
 
 
-def do_nothing_arg(token_argument):
-    pass
+def set_bool(token_argument):
+    global bool_value
+    bool_value = token_argument
 
 
 @patch("bottle.Bottle.route")
@@ -34,19 +35,26 @@ def test_simple_button_registration(mock_route):
 def test_simple_button_registration_fails_when_arguments(mock_route):
     server.clear_buttons()
     with pytest.raises(server.InvalidArgumentsException):
-        button.simple("this is a button")(do_nothing_arg)
+        button.simple("this is a button")(set_bool)
     assert server.get_buttons_registered() == {'buttons': []}
     mock_route.assert_not_called()
+
+
+def mock_call(uri, headers, func):
+    assert uri == "buttons/0"
+    assert headers == ["POST", "OPTIONS"]
 
 
 @patch("bottle.Bottle.route")
 def test_toggle_button_registration(mock_route):
     server.clear_buttons()
-    button.toggle("Toggle Button", do_nothing)(do_nothing_arg)
+    button.toggle("Toggle Button", do_nothing)(set_bool)
     expected = {"text": "Toggle Button",
                 "type": "button.toggle",
                 "state": False,
                 "id": 0}
+
+    mock_route.side_effect = mock_call
     assert server.get_buttons_registered() == {"buttons": [expected]}
 
     global bool_value
@@ -54,9 +62,7 @@ def test_toggle_button_registration(mock_route):
     expected["state"] = True
     assert server.get_buttons_registered() == {"buttons": [expected]}
 
-    mock_route.assert_called_once_with("/buttons/0",
-                                       ["POST", "OPTIONS"],
-                                       do_nothing_arg)
+    mock_route.assert_called_once()
 
 
 @patch("bottle.Bottle.route")
