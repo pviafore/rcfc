@@ -2,6 +2,6 @@ language: python
 python: 
   - "3.6"
   - "nightly"
-before_install: "python setup.py install"
-install: "pip install -r requirements.txt -r dev_requirements.txt"
+before_install: "pip install setuptools>38.5.1; python setup.py install"
+install: "pip install -r dev_requirements.txt"
 script: make test
