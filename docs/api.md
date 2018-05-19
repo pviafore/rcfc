@@ -38,6 +38,21 @@ Data:
 }
 ```
 
-The text is the text displayed on the actuall button.
+The text is the text displayed on the actual button.
  
 To interact with this button, send a POST request to `/buttons/<id>`
+
+#### Toggle Buttons
+A button that can be flipped on/off.
+
+Data: 
+```
+{
+    "id": <id>,
+    "type": "button.toggle",
+    "state": True/False
+    "text": "Label for the Data"
+}
+```
+
+To interact with this button, send a POST request to `/buttons/<id>` and pass it a json object `{value: true/false}`
