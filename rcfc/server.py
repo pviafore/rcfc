@@ -37,7 +37,13 @@ def register_post(button, setter):
 
 def _register_button_action(button, getter, setter):
     next_index = len(_buttons_registered)
-    route(f"/buttons/{next_index}", ["POST", "OPTIONS"], setter)
+
+    def ignore_options_set():
+        if(request.method == "OPTIONS"):
+            return
+        setter()
+
+    route(f"/buttons/{next_index}", ["POST", "OPTIONS"], ignore_options_set)
     button["id"] = next_index
     button["getter"] = getter
 

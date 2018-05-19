@@ -4,6 +4,12 @@ import pytest
 
 from rcfc import server, button
 
+
+class IgnoredArgument():
+    def __eq__(self, other):
+        return True
+
+
 bool_value = False
 
 
@@ -28,7 +34,7 @@ def test_simple_button_registration(mock_route):
 
     mock_route.assert_called_once_with("/buttons/0",
                                        ["POST", "OPTIONS"],
-                                       do_nothing)
+                                       IgnoredArgument())
 
 
 @patch("bottle.Bottle.route")
@@ -62,7 +68,9 @@ def test_toggle_button_registration(mock_route):
     expected["state"] = True
     assert server.get_buttons_registered() == {"buttons": [expected]}
 
-    mock_route.assert_called_once()
+    mock_route.assert_called_once_with("/buttons/0",
+                                       ["POST", "OPTIONS"],
+                                       IgnoredArgument())
 
 
 @patch("bottle.Bottle.route")
