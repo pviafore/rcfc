@@ -29,17 +29,58 @@
         }
     }
 
+    function displayGroup(group) {
+      if(group == null) {
+        name = "unassigned"
+      } else {
+        name = group
+      }
+      let id = name.replace(/ /g, '_');
+      $("#group-content").append("<button id='" + id + "'>" + name + "</button>");
+      $("#" + id).click(function () {
+        clearButtons();
+        console.log(group);
+        loadButtons(group);
+      });
+    }
+
+    function clearButtons() {
+      $("#remote").empty();
+    }
+
+    function displayGroups(data) {
+      data.groups.forEach(displayGroup);
+    }
+
     function displayButtons(data) {
         data.buttons.forEach(displayButton);
     }
 
-    function loadButtons() {
+    function displayButtonsInGroup(data, group) {
+      data.buttons = data.buttons.filter(button => {
+        return button.group == group
+      });
+      displayButtons(data);
+    }
+
+    function loadButtons(group) {
         $.ajax({
             url: "/buttons",
-            success: displayButtons,
+            success: function(data) {
+              console.log(data)
+              displayButtonsInGroup(data, group)
+            },
             dataType: "json"
         });
     }
 
-    $(document).ready(loadButtons);
+    function loadGroups() {
+      $.ajax({
+        url: "/groups",
+        success: displayGroups,
+        dataType: "json"
+      });
+    }
+
+    $(document).ready(loadGroups);
 }());
