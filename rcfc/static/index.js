@@ -30,16 +30,11 @@
     }
 
     function displayGroup(group) {
-      if(group == null) {
-        name = "unassigned"
-      } else {
-        name = group
-      }
-      let id = name.replace(/ /g, '_');
-      $("#group-content").append("<button id='" + id + "'>" + name + "</button>");
-      $("#" + id).click(function () {
+      name = group || "unassigned";
+      $("#group-content").append("<button id='" + name + "'>" + name + "</button>");
+      $("#" + name.replace(/([ /])/g, '\\$1')).click(function () {
         clearButtons();
-        console.log(group);
+        console.log("Getting group info");
         loadButtons(group);
       });
     }
