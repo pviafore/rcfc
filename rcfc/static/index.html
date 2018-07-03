@@ -6,17 +6,23 @@
     <script src="static/index.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="static/static.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+    <div id="group-tabs" class="w3-bar w3-black">
+    </div>
     <div id="groups">
-        <button class="groupbtn">Groups</button>
-        <div id="group-content"></div>
     </div>
-    <div id="top">
-        <div class="container col-xs-offset-3 col-xs-6 text-center" id="remote">
-            <div class="row" ></div>
-        </div>
-    </div>
+  <script>
+    function openGroup(groupId) {
+      var i;
+      var x = document.getElementsByClassName("group");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      document.getElementById(groupId).style.display = "block";
+    }
+  </script>
 </body>
 </html>

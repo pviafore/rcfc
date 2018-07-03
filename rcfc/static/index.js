@@ -11,15 +11,16 @@
         return "button" + id;
     }
 
-    function displayButton(button) {
+    function displayButton(parentGroupId, button) {
+      console.log('loading ' + button.text)
         if (button.type === "button.simple") {
-            $("#remote").append("<div class='row'><button class='btn-lg btn-info' id='" + getId(button.id) + "'>" + button.text + "</button></div>");
+            $("#" + parentGroupId).append("<div class='row'><button class='btn-lg btn-info' id='" + getId(button.id) + "'>" + button.text + "</button></div>");
             $("#" + getId(button.id)).click(function () {
                 $.post({url: "/buttons/" + button.id});
             });
         }
         if (button.type === "button.toggle") {
-            $("#remote").append("<div class='row'>" + button.text + ": <label class='switch'><input type='checkbox' id='" + getId(button.id) + "'><span class='slider round'></span></label></button></div>");
+            $("#" + parentGroupId).append("<div class='row'>" + button.text + ": <label class='switch'><input type='checkbox' id='" + getId(button.id) + "'><span class='slider round'></span></label></button></div>");
             $("#" + getId(button.id)).click(function () {
                 $.post({url: "/buttons/" + button.id, data: JSON.stringify({value: $("#" + getId(button.id)).prop('checked')}), contentType: "application/json"})
             });
@@ -30,40 +31,35 @@
     }
 
     function displayGroup(group) {
-      name = group || "unassigned";
-      $("#group-content").append("<button id='" + name + "'>" + name + "</button>");
-      $("#" + name.replace(/([ /])/g, '\\$1')).click(function () {
-        clearButtons();
-        console.log("Getting group info");
-        loadButtons(group);
-      });
-    }
+      name = group || "Unassigned";
+      var uniqueID = new Date().getTime();
+      $("#group-tabs").append('<button class=\"w3-bar-item w3-button\" onclick=\"openGroup(\'' + uniqueID + '\')\">' + name + '</button>');
 
-    function clearButtons() {
-      $("#remote").empty();
+      $("#groups").append('<div id="' + uniqueID + '" class="container col-xs-offset-3 col-xs-6 text-center group"></div>')
+      console.log('loading group ' + name);
+      loadButtons(group, uniqueID)
     }
 
     function displayGroups(data) {
       data.groups.forEach(displayGroup);
     }
 
-    function displayButtons(data) {
-        data.buttons.forEach(displayButton);
+    function displayButtons(groupId, data) {
+        data.buttons.forEach(function (button) { displayButton(groupId, button); });
     }
 
-    function displayButtonsInGroup(data, group) {
+    function displayButtonsInGroup(data, group, groupId) {
       data.buttons = data.buttons.filter(button => {
         return button.group == group
       });
-      displayButtons(data);
+      displayButtons(groupId, data);
     }
 
-    function loadButtons(group) {
+    function loadButtons(group, groupId) {
         $.ajax({
             url: "/buttons",
             success: function(data) {
-              console.log(data)
-              displayButtonsInGroup(data, group)
+              displayButtonsInGroup(data, group, groupId)
             },
             dataType: "json"
         });
