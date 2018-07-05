@@ -28,6 +28,7 @@ def test_simple_button_registration(mock_route):
     button.simple("this is a button")(do_nothing)
     expected = {"text": "this is a button",
                 "type": "button.simple",
+                "group": None,
                 "state": None,
                 "id": 0}
     assert server.get_buttons_registered() == {"buttons": [expected]}
@@ -46,6 +47,13 @@ def test_simple_button_registration_fails_when_arguments(mock_route):
     mock_route.assert_not_called()
 
 
+@patch("bottle.Bottle.route")
+def test_group_simple_button_registration(mock_route):
+    server.clear_buttons()
+    button.simple("Group Button", "Group A")(do_nothing)
+    assert server.get_buttons_registered()["buttons"][0]["group"] == "Group A"
+
+
 def mock_call(uri, headers, func):
     assert uri == "buttons/0"
     assert headers == ["POST", "OPTIONS"]
@@ -57,6 +65,7 @@ def test_toggle_button_registration(mock_route):
     button.toggle("Toggle Button", do_nothing)(set_bool)
     expected = {"text": "Toggle Button",
                 "type": "button.toggle",
+                "group": None,
                 "state": False,
                 "id": 0}
 
@@ -80,3 +89,10 @@ def test_toggle_button_registration_with_invalid_args(mock_route):
         button.toggle("Toggle Button", do_nothing)(do_nothing)
     assert server.get_buttons_registered() == {'buttons': []}
     mock_route.assert_not_called()
+
+
+@patch("bottle.Bottle.route")
+def test_toggle_button_registration(mock_route):
+    server.clear_buttons()
+    button.toggle("Toggle Button", do_nothing, "Group A")(set_bool)
+    assert server.get_buttons_registered()["buttons"][0]["group"] == "Group A"
