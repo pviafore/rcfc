@@ -101,16 +101,6 @@ def get_buttons_registered():
     return {"buttons": buttons_with_state}
 
 
-@get("/groups")
-def get_groups_registered():
-    """
-    Get groups registered
-    :return: a dictionary containing the groups registered
-    """
-    button_groups = list(set([dict(b)["group"] for b in _buttons_registered]))
-    return {"groups": button_groups}
-
-
 @get("/")
 def route_index():
     """ Route to the index page """

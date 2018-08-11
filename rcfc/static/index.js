@@ -6,72 +6,87 @@
 (function () {
     "use strict";
     "esversion: 6";
-;
+
+    function loadPage() {
+
+    }
+
     function getId(id) {
         return "button" + id;
     }
 
-    function displayButton(parentGroupId, button) {
-      console.log('loading ' + button.text)
+    function displayButton(button) {
         if (button.type === "button.simple") {
-            $("#" + parentGroupId).append("<div class='row'><button class='btn-lg btn-info' id='" + getId(button.id) + "'>" + button.text + "</button></div>");
-            $("#" + getId(button.id)).click(function () {
-                $.post({url: "/buttons/" + button.id});
-            });
+            displaySimpleButton(button);
         }
         if (button.type === "button.toggle") {
-            $("#" + parentGroupId).append("<div class='row'>" + button.text + ": <label class='switch'><input type='checkbox' id='" + getId(button.id) + "'><span class='slider round'></span></label></button></div>");
-            $("#" + getId(button.id)).click(function () {
-                $.post({url: "/buttons/" + button.id, data: JSON.stringify({value: $("#" + getId(button.id)).prop('checked')}), contentType: "application/json"})
-            });
-            if(button.state) {
-                $("#" + getId(button.id)).prop('checked', true);
-            }
+            displayToggleButton(button);
         }
+    }
+
+    function displaySimpleButton(button) {
+        $("#groupContainer").append("<div class='row'><button class='btn-lg btn-info' id='" + getId(button.id) + "'>" + button.text + "</button></div>");
+        $("#" + getId(button.id)).click(function () {
+            $.post({ url: "/buttons/" + button.id });
+        });
+    }
+
+    function displayToggleButton(button) {
+        $("#groupContainer").append("<div class='row'>" + button.text + ": <label class='switch'><input type='checkbox' id='" + getId(button.id) + "'><span class='slider round'></span></label></button></div>");
+        $("#" + getId(button.id)).click(function () {
+            $.post({ url: "/buttons/" + button.id, data: JSON.stringify({ value: $("#" + getId(button.id)).prop('checked') }), contentType: "application/json" })
+        });
+        if (button.state) {
+            $("#" + getId(button.id)).prop('checked', true);
+        }
+
     }
 
     function displayGroup(group) {
-      name = group || "Unassigned";
-      var uniqueID = new Date().getTime();
-      $("#group-tabs").append('<button class=\"w3-bar-item w3-button\" onclick=\"openGroup(\'' + uniqueID + '\')\">' + name + '</button>');
-
-      $("#groups").append('<div id="' + uniqueID + '" class="container col-xs-offset-3 col-xs-6 text-center group"></div>')
-      console.log('loading group ' + name);
-      loadButtons(group, uniqueID)
+        $("#group-tabs").append('<button class=\"w3-bar-item w3-button\" name="'+ group +'")\">' + group + '</button>');
     }
 
-    function displayGroups(data) {
-      data.groups.forEach(displayGroup);
+    function displayGroupTabs(data, groups) {
+        if(groups.length !== 0) {
+            groups = ["All", ...groups, "Unassigned"]
+        }
+        groups.forEach(displayGroup);
+        $("#group-tabs button").click((event) => displayButtons(data, event.target.name));
+        $("#groups").append('<div id="groupContainer" class="container col-xs-offset-3 col-xs-6 text-center group"></div>')
     }
 
-    function displayButtons(groupId, data) {
-        data.buttons.forEach(function (button) { displayButton(groupId, button); });
+
+    function displayButtons(data, group) {
+        $("#groupContainer").empty();
+        data.buttons
+            .filter(b => isCorrectGroup(b, group))
+            .forEach(b => displayButton(b) );
+            
     }
 
-    function displayButtonsInGroup(data, group, groupId) {
-      data.buttons = data.buttons.filter(button => {
-        return button.group == group
-      });
-      displayButtons(groupId, data);
+    function isCorrectGroup(button, group) {
+        return button.groups.indexOf(group) !== -1 ||
+               group === "All" ||
+               group === "Unassigned" && button.groups.length === 0;   
     }
 
-    function loadButtons(group, groupId) {
+    function loadButtons() {
         $.ajax({
             url: "/buttons",
-            success: function(data) {
-              displayButtonsInGroup(data, group, groupId)
+            success: function (data) {
+                displayGroupTabs(data, getGroups(data));
+                displayButtons(data, "All")
             },
             dataType: "json"
         });
     }
 
-    function loadGroups() {
-      $.ajax({
-        url: "/groups",
-        success: displayGroups,
-        dataType: "json"
-      });
+    function getGroups(data) {
+        return [].concat
+                 .apply([], data.buttons.map((button) => button.groups))
+                 .filter((value, index, self) => self.indexOf(value) === index);
     }
 
-    $(document).ready(loadGroups);
+
+    $(document).ready(loadButtons);
 }());

@@ -10,7 +10,7 @@ def simple(text, group=None):
     def wrapper(func):
         register_post({"text": text,
                        "type": "button.simple",
-                       "group": group},
+                       "groups": _convertGroup(group)},
                       func)
     return wrapper
 
@@ -18,6 +18,14 @@ def simple(text, group=None):
 def toggle(text, getter, group=None):
     """ A on/off slider toggle """
     def wrapper(setter):
-        button = {"text": text, "type": "button.toggle", "group": group}
+        button = {"text": text, "type": "button.toggle", "groups": _convertGroup(group)}
         register_post_with_state(button, getter, setter)
     return wrapper
+
+def _convertGroup(group):
+    if(isinstance(group, str)):
+        return [group]
+    if group is None:
+        return []
+    assert isinstance(group, list), f"The group: {group} must be a list or string"
+    return group

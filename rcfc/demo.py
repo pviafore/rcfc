@@ -29,6 +29,14 @@ def simple_group_button():
     print("You pressed a group button!")
 
 
+@button.simple("Multiple Group Button!", group=["Group A", "Group B"])
+def simple_group_button():
+    """
+    Print to console that a button was pressed
+    """
+    print("You pressed a multiple group button!")
+
+
 bool_value = False
 group_a_bool_value = False
 
