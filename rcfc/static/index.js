@@ -75,7 +75,7 @@
             url: "/buttons",
             success: function (data) {
                 displayGroupTabs(data, getGroups(data));
-                displayButtons(data, "All")
+                displayButtons(data, "All");
             },
             dataType: "json"
         });
