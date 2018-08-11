@@ -24,24 +24,9 @@ Every button will have the following:
 
 * ID: a string used for uniquely identifying buttons
 * Type: A string stating the type (described below)
-* Group: A string stating the group that the button belongs to (can be None)
+* Groups: A list of strings stating the groups that the button belongs to (can be empty)
 * Button-specific fields
 
-### /groups
-
-This will return the following JSON information
-```
-{
-  "groups": [
-             <group-1>,
-             <group-2>,
-             ...
-             <button-n>
-            ]
-}
-```
-
-This will be a unique set of Group references (String) that are currently referenced from buttons.
 
 #### Simple Buttons
 A button that you can press, containing some text
@@ -51,7 +36,7 @@ Data:
 {
   "id": <id>,
   "type": "button.simple",
-  "group": "Label for the Group"
+  "groups": "List of groups"
   "text": <text of button>
 }
 ```
@@ -68,7 +53,7 @@ Data:
 {
     "id": <id>,
     "type": "button.toggle",
-    "group": "Label for the Group"
+    "groups": "List of groups"
     "state": True/False
     "text": "Label for the Data"
 }

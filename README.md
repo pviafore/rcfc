@@ -56,6 +56,22 @@ def button_has_been_toggled(value):
 The function decorated will be passed a True/False value when the toggle is set.   There is also a getter function that reflects the correct state. 
 
 
+### Grouping Buttons
+
+It is possible to group buttons.
+
+You may assign a button a single group, like so: 
+
+```python
+@button.simple("Click me!", group="Group Alpha")
+```
+
+or you may assign multiple groups to the button:
+
+```python
+@button.simple("Click me!", group=["Group Alpha", "Group Omega"])
+```
+
 ## Demo
 There is a built-in demo if you'd like to see it in action.  Simply execute rcfc_demo on your shell (or make demo if you're in the project) and a demo server will launch on port 7232.
 Open up http://localhost:7232 to see buttons that are available.  You can see the source code at [demo source code](rcfc/demo.py)
