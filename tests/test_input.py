@@ -47,3 +47,22 @@ def test_slider_with_range(mock_route):
     mock_route.assert_called_once_with("/buttons/0",
                                        ["POST", "OPTIONS"],
                                        IgnoredArgument())
+
+
+arrow = input_methods.DIRECTIONAL.LEFT
+
+
+@patch("bottle.Bottle.route")
+def test_leftright_arrows(mock_route):
+    server.clear_buttons()
+    input_methods.left_right_arrows("Left/Right")(set_input_value)
+    expected = {"text": "Left/Right",
+                "type": "input.leftright",
+                "groups": [],
+                "state": None,
+                "id": 0}
+    assert server.get_buttons_registered() == {"buttons": [expected]}
+
+    mock_route.assert_called_once_with("/buttons/0",
+                                       ["POST", "OPTIONS"],
+                                       IgnoredArgument())

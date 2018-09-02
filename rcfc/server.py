@@ -66,6 +66,16 @@ def register_post_with_state(button, getter, setter):
     _register_button_action(button, getter, set_value)
 
 
+def register_post_with_input(button, setter):
+    """
+    Register a post endpoint that handles different values being set
+    :param button: the info on the button
+    :param setter: the setter that updates the state
+    :return:
+    """
+    register_post_with_state(button, getter_placeholder, setter)
+
+
 def _validate_arguments(func, expected):
     number_of_arguments = len(inspect.getargspec(func).args)
     if number_of_arguments != expected:
