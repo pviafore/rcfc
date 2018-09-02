@@ -91,6 +91,20 @@ def arrows(val):
     print(f"Arrows were set to {val}")
 
 
+rgb = (10, 20, 30)
+
+
+def get_rgb():
+    return rgb
+
+
+@input_methods.colorpicker("Color picker", lambda: rgb)
+def colorpicker(val):
+    global rgb
+    print(f"Color was picked: {val}")
+    rgb = val
+
+
 def main():
     """
     Main Method

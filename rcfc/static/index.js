@@ -28,6 +28,9 @@
         if (button.type === "input.leftright") {
             displayLeftRightArrows(button);
         }
+        if (button.type === "input.colorpicker") {
+            displayColorPicker(button);
+        }
     }
 
     function displaySimpleButton(button) {
@@ -66,6 +69,22 @@
                                     "<input id='" + getId(slider.id) + "' type=\"range\" min=\"" + slider.min + "\" max=\"" + slider.max +"\" class=\"input-slider\" value=\"" + slider.state + "\"/></div></div>");
         $("#" + getId(slider.id)).click(function () {
             $.post({ url: "/buttons/" + slider.id, data: JSON.stringify({value: this.value }), contentType: "application/json" });
+        });
+    }
+
+    function displayColorPicker(colorpicker) {
+        $("#groupContainer").append("<div class='row'>" + 
+                                    colorpicker.text + 
+                                    "<br />Red: <input id='" + getId(colorpicker.id) + "_red' type=\"text\" value=\"" + colorpicker.state[0] + "\"/>" + 
+                                    "<br />Blue: <input id='" + getId(colorpicker.id) + "_blue' type=\"text\" value=\"" + colorpicker.state[1] + "\"/>" + 
+                                    "<br />Green: <input id='" + getId(colorpicker.id) + "_green' type=\"text\" value=\"" + colorpicker.state[2] + "\"/>" + 
+                                    "<br /><input id='" + getId(colorpicker.id) + "' type=\"submit\" value=\"Submit\" >" + 
+                                    "</div>");
+        $("#" + getId(colorpicker.id)).click(function () {
+            const red = $("#" + getId(colorpicker.id) +"_red")[0].value;
+            const blue = $("#" + getId(colorpicker.id) +"_blue")[0].value;
+            const green = $("#" + getId(colorpicker.id) +"_green")[0].value;
+            $.post({ url: "/buttons/" + colorpicker.id, data: JSON.stringify({value: [red, blue, green] }), contentType: "application/json" });
         });
     }
 
