@@ -25,6 +25,9 @@
         if (button.type === "input.slider") {
             displayInputSlider(button);
         }
+        if (button.type === "input.leftright") {
+            displayLeftRightArrows(button);
+        }
     }
 
     function displaySimpleButton(button) {
@@ -43,6 +46,18 @@
             $("#" + getId(button.id)).prop('checked', true);
         }
 
+    }
+
+    function displayLeftRightArrows(arrows) {
+        $("#groupContainer").append("<div class='row'>" + arrows.text + "<br /><span id=\"" + 
+                                       getId(arrows.id) + "_left\"class=\"glyphicon glyphicon-arrow-left\" /><span id=\"" + 
+                                       getId(arrows.id) + "_right\"class=\"glyphicon glyphicon-arrow-right\" /></div>");
+        $("#" + getId(arrows.id + "_left")).click(function () {
+            $.post({ url: "/buttons/" + arrows.id, data: JSON.stringify({ value: "left"}), contentType: "application/json" });
+        });
+        $("#" + getId(arrows.id + "_right")).click(function () {
+            $.post({ url: "/buttons/" + arrows.id, data: JSON.stringify({ value: "right"}), contentType: "application/json" });
+        });
     }
 
     function displayInputSlider(slider) {

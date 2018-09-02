@@ -86,6 +86,10 @@ def simple_slider2(val):
     slider_value2 = val
 
 
+@input_methods.left_right_arrows("Arrows")
+def arrows(val):
+    print(f"Arrows were set to {val}")
+
 def main():
     """
     Main Method
