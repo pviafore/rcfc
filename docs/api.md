@@ -55,8 +55,53 @@ Data:
     "type": "button.toggle",
     "groups": "List of groups"
     "state": True/False
-    "text": "Label for the Data"
+    "text": "Label for the toggle"
+}
+```
+To interact with this button, send a POST request to `/buttons/<id>` and pass it a json object `{value: true/false}`
+
+### Slider Inputs
+A slider with a range
+Data:
+```
+{
+    "id": <id>,
+    "type": "input.slider",
+    "groups": "List of groups",
+    "state": current slider value,
+    "min": minimum of slider,
+    "max": maximum of slider,
+    "text": "Label for the slider"
 }
 ```
 
-To interact with this button, send a POST request to `/buttons/<id>` and pass it a json object `{value: true/false}`
+To interact with this button, send a POST request to `/buttons/<id>` and pass it a json object `{value: <value of slider>}`
+
+### Left/Right Arrow Inputs
+Arrows that can be left or right
+Data:
+```
+{
+    "id": <id>,
+    "type": "input.leftright",
+    "groups": "List of groups",
+    "text": "Label for the arrows"
+}
+```
+
+To interact with this button, send a POST request to `/buttons/<id>` and pass it a json object `{value: left/right>}`
+
+### Colorpicker Inputs
+Allows for RGB values to be set
+Data:
+```
+{
+    "id": <id>,
+    "type": "input.colorpicker",
+    "groups": "List of groups",
+    "state": Current color
+    "text": "Label for the colorpicker"
+}
+```
+
+To interact with this button, send a POST request to `/buttons/<id>` and pass it a json object `{value: [red, green, blue]}`, where red,green, and blue are values from 0 to 255.
