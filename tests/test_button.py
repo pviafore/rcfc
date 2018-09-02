@@ -3,11 +3,7 @@ from unittest.mock import patch
 import pytest
 
 from rcfc import server, button
-
-
-class IgnoredArgument():
-    def __eq__(self, other):
-        return True
+from test_helpers import IgnoredArgument
 
 
 bool_value = False
