@@ -22,6 +22,9 @@
         if (button.type === "button.toggle") {
             displayToggleButton(button);
         }
+        if (button.type === "input.slider") {
+            displayInputSlider(button);
+        }
     }
 
     function displaySimpleButton(button) {
@@ -40,6 +43,15 @@
             $("#" + getId(button.id)).prop('checked', true);
         }
 
+    }
+
+    function displayInputSlider(slider) {
+        $("#groupContainer").append("<div class='row'><div class='slidercontainer' >" + 
+                                    slider.text + 
+                                    "<input id='" + getId(slider.id) + "' type=\"range\" min=\"" + slider.min + "\" max=\"" + slider.max +"\" class=\"input-slider\" value=\"" + slider.state + "\"/></div></div>");
+        $("#" + getId(slider.id)).click(function () {
+            $.post({ url: "/buttons/" + slider.id, data: JSON.stringify({value: this.value }), contentType: "application/json" });
+        });
     }
 
     function displayGroup(group) {

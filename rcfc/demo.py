@@ -2,7 +2,7 @@
 A demo service for buttons
 """
 
-from rcfc import button, server
+from rcfc import button, server, input_methods
 
 
 @button.simple("Easy")
@@ -64,6 +64,26 @@ def toggle_group_button(toggle):
     print(f"The group toggle was set to {toggle}")
     global group_a_bool_value
     group_a_bool_value = toggle
+
+
+slider_value = 20
+
+
+@input_methods.slider("Slider", lambda: slider_value)
+def simple_slider(val):
+    global slider_value
+    print(f"Value set to: {val}")
+    slider_value = val
+
+
+slider_value2 = 20
+
+
+@input_methods.slider("Restricted Slider", lambda: slider_value2, (10, 30))
+def simple_slider2(val):
+    global slider_value2
+    print(f"Value set to: {val}")
+    slider_value2 = val
 
 
 def main():
