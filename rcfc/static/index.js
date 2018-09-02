@@ -84,7 +84,7 @@
             const red = $("#" + getId(colorpicker.id) +"_red")[0].value;
             const blue = $("#" + getId(colorpicker.id) +"_blue")[0].value;
             const green = $("#" + getId(colorpicker.id) +"_green")[0].value;
-            $.post({ url: "/buttons/" + colorpicker.id, data: JSON.stringify({value: [red, blue, green] }), contentType: "application/json" });
+            $.post({ url: "/buttons/" + colorpicker.id, data: JSON.stringify({value: [red, green, blue] }), contentType: "application/json" });
         });
     }
 

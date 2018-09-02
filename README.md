@@ -55,6 +55,61 @@ def button_has_been_toggled(value):
 
 The function decorated will be passed a True/False value when the toggle is set.   There is also a getter function that reflects the correct state. 
 
+## Other Input Methods
+### Sliders
+
+A slider provides a range of input values (such as what may be used in a dimmer)
+
+```python
+from rcfc import input_methods
+
+def get_value():
+    #write your own function that returns the current state of the slider
+    return 30
+
+@input_methods.slider("Slider Text", get_value)
+def set_slider_value(value):
+    print(f"The value is {value}")
+```
+
+If you need to customize the min/max (Default is 0/100), you can pass in the range as an additional argument
+
+```python
+@input_methods.slider("Slider Text", get_value, input_range=(50,60))
+```
+
+### Left/Right Arrows
+
+A set of arrows that let you choose a left/right option
+
+```python
+from rcfc import input_methods
+
+@input_methods.left_right_arrows("Arrows Text")
+def set_arrows(value):
+    print(f"The value set is {value}")
+```
+
+The value passed down will be either input_methods.DIRECTIONAL.LEFT or input_methods.DIRECTIONAL.RIGHT.
+
+### Colorpicker
+
+A color picker giving RGB values
+
+```python
+from rcfc import input_methods
+
+def get_value():
+    #write your own function that returns the current state of the slider
+    return (30, 255, 0)
+
+@input_methods.colorpicker("Colorpicker text", get_value)
+def set_color(value):
+    print(f"The value set is {value}")
+
+```
+
+The value set is a tuple in the form of (red, green, blue)
 
 ### Grouping Buttons
 
