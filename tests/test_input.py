@@ -66,3 +66,27 @@ def test_leftright_arrows(mock_route):
     mock_route.assert_called_once_with("/buttons/0",
                                        ["POST", "OPTIONS"],
                                        IgnoredArgument())
+
+
+rgb = (10, 20, 30)
+
+
+def set_color(color):
+    global rgb
+    rgb = color
+
+
+@patch("bottle.Bottle.route")
+def test_colorpicker(mock_route):
+    server.clear_buttons()
+    input_methods.colorpicker("Color Picker", lambda: rgb)(set_color)
+    expected = {"text": "Color Picker",
+                "type": "input.colorpicker",
+                "groups": [],
+                "state": (10, 20, 30),
+                "id": 0}
+    assert server.get_buttons_registered() == {"buttons": [expected]}
+
+    mock_route.assert_called_once_with("/buttons/0",
+                                       ["POST", "OPTIONS"],
+                                       IgnoredArgument())

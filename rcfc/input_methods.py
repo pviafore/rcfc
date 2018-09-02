@@ -33,3 +33,14 @@ def left_right_arrows(text, group=None):
         }
         register_post_with_input(arrows, setter)
     return wrapper
+
+
+def colorpicker(text, getter, group=None):
+    def wrapper(setter):
+        colorpicker = {
+            "text": text,
+            "type": "input.colorpicker",
+            "groups": convertGroup(group)
+        }
+        register_post_with_state(colorpicker, getter, setter)
+    return wrapper

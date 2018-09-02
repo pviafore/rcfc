@@ -90,6 +90,7 @@ def simple_slider2(val):
 def arrows(val):
     print(f"Arrows were set to {val}")
 
+
 def main():
     """
     Main Method
