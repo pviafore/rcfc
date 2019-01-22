@@ -1,7 +1,15 @@
 # rcfc - Remote Control For Computers
-Welcome to RCFC.  This is a pet project started to help out with some automation around the house.
+Welcome to RCFC.  This is a pet project started to help out with some automation around the house.  
 
-It provides a way to write Python functions that can be exposed as buttons on a website.  There are plans to make an Android app that would automatically connect to RCFC servers and provide a UI to the user.  For now, we have to deal with a ugly website UI (if you want to spruce it up, feel free to submit a PR)
+It provides a way to write Python functions that can be exposed as buttons on a website.  Thereis also an Android app RCFC that would automatically connect to RCFC servers and provide a UI to the user.  
+
+Writing native phone software was very tedious, so RCFC aims to fill in the gap with quick-to-write phone GUIs with a backend that you can quickly iterate on.
+
+Use it to
+
+* Provide a GUI to a headless device, such as a Raspberry Pi
+* Create a quick mock-up backed up by a real service
+* Automate routines in your day, like setting up a workflow through your phone.
 
 ## Installing 
 
@@ -131,7 +139,7 @@ or you may assign multiple groups to the button:
 There is a built-in demo if you'd like to see it in action.  Simply execute rcfc_demo on your shell (or make demo if you're in the project) and a demo server will launch on port 7232.
 Open up http://localhost:7232 to see buttons that are available.  You can see the source code at [demo source code](rcfc/demo.py)
 
-You can also check the companion GUI project, which makes it look a lot nicer.  See it [here](https://github.com/pviafore/rcfc-ionic)
+You can also check the companion Android GUI project, which makes it look a lot nicer.  See it [here](https://github.com/pviafore/rcfc-ionic)
 
 ## Why Bottle under the hood? Why not use Flask, Django, Pyramid, etc.?
 Bottle had a very small footprint and very few dependencies.  The goal is to get this project up and going as quickly as possible.
