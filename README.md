@@ -149,3 +149,5 @@ Bottle had a very small footprint and very few dependencies.  The goal is to get
 Want to contribute? Check out our [guide](CONTRIBUTING.md)
 
 Want to write a GUI?  Check out our API docs [here](docs/api.md)
+
+Want to see a video explaining the history and background of the project?  Check [here](https://www.youtube.com/watch?v=KSDW-EuKDgg)
