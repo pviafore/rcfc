@@ -126,13 +126,13 @@ def route_static(path):
     return static_file(path, root=_get_static_directory())
 
 
-def start():
+def start(host="127.0.0.1"):
     """
     Starts our webserver on port 7232
     """
     print("You can view your buttons in a web-browser "
           "by navigating to http://localhost:7232/")
-    run(host="0.0.0.0", port=7232)
+    run(host=host, port=7232)
 
 
 class InvalidArgumentsException(ValueError):
