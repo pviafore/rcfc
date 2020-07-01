@@ -109,7 +109,7 @@ def main():
     """
     Main Method
     """
-    server.start()
+    server.start(host="0.0.0.0")
 
 
 if __name__ == "__main__":
